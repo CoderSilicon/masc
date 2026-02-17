@@ -1,27 +1,13 @@
 <script lang="ts">
-
-  import Intro from "$lib/components/views/Intro.svelte";
-  import Architecture from "$lib/components/views/Architecture.svelte";
-  import Engine from "$lib/components/views/Engine.svelte";
-  import Immunity from "$lib/components/views/Immunity.svelte";
-  import Ready from "$lib/components/views/Ready.svelte";
-
-  // Function to simulate a live "shredding" of the input
+  import Intro from "$lib/components/layout/Intro.svelte";
+  import Architecture from "$lib/components/layout/Architecture.svelte";
+  import Engine from "$lib/components/layout/Engine.svelte";
+  import Immunity from "$lib/components/layout/Immunity.svelte";
+  import Ready from "$lib/components/layout/Ready.svelte";
+  import Navbar from "$lib/components/ui/Navbar.svelte";
 </script>
 
-<!-- ----- HERO SECTION ----- -->
-<Intro />
-<!-- ----- ARCHITECTURE SECTION ----- -->
-<Architecture />
-
-<!-- ----- ENGINE SECTION ----- -->
-<Engine />
-
-<!-- ----- IMMUNITY SECTION ----- -->
-<Immunity />
-
-<!-- ----- READY SECTION ----- -->
-<Ready />
+<Navbar /><Intro /><Architecture /><Engine /><Immunity /><Ready />
 
 <style>
   @keyframes progress {
