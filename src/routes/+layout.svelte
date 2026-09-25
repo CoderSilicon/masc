@@ -37,7 +37,7 @@
 </script>
 
 <svelte:head>
-	<title>Vault256</title>
+	<title>masc</title>
 	<link rel="icon" href={favicon} />
 </svelte:head>
 

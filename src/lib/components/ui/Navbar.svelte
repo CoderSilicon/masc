@@ -1,7 +1,16 @@
 <script lang="ts">
   import { gsap } from "gsap";
-  import { Menu, X, Terminal, ChevronRight } from "lucide-svelte";
-  import logo from "$lib/assets/256.svg";
+  import { Menu, X, ChevronRight } from "lucide-svelte";
+  import logo from "$lib/assets/masc.svg";
+
+  // The workbench is the product, so it gets the only button. The rest are plain links
+  // and live in the bar rather than competing with a second call to action.
+  const links = [
+    { label: "How it works", href: "/#how" },
+    { label: "Limits", href: "/#limits" },
+    { label: "Features", href: "/features" },
+    { label: "Documentation", href: "/documentation" }
+  ];
 
   let isMenuOpen = false;
   let mobileMenu: HTMLDivElement;
@@ -24,107 +33,72 @@
   }
 </script>
 
-<nav class="hidden md:grid grid-cols-3 items-center bg-zinc-950 p-4">
-  <a href="/">
-    <div class="flex gap-3 mx-2 items-center">
-      <img src={logo} alt="logo" class="h-10 w-10" />
-      <span class="text-3xl text-white jetbrains-mono-400">Vault256</span>
-    </div>
+<nav class="hidden md:grid grid-cols-3 items-center bg-zinc-950 px-6 h-16">
+  <a href="/" class="flex items-center gap-2.5 w-fit">
+    <img src={logo} alt="" class="h-7 w-7" />
+    <span class="text-sm text-white jetbrains-mono-400">masc</span>
   </a>
-  <ul class="flex justify-center gap-6 text-white jetbrains-mono-200">
-    <li class="hover:text-emerald-400 cursor-pointer transition-colors">
-      <a href="/features">Features</a>
-    </li>
-    <li class="hover:text-emerald-400 cursor-pointer transition-colors">
-      <a href="/about">About</a>
-    </li>
-    <li class="hover:text-emerald-400 cursor-pointer transition-colors">
-      <a href="/pricing">Pricing</a>
-    </li>
-    <li class="hover:text-emerald-400 cursor-pointer transition-colors">
-      <a href="/documentation">Documentation</a>
-    </li>
-    <li class="hover:text-emerald-400 cursor-pointer transition-colors">
-      <a href="/contact">Contact Us</a>
-    </li>
+
+  <ul class="flex justify-center gap-7 text-sm text-zinc-500 jetbrains-mono-200">
+    {#each links as link}
+      <li>
+        <a href={link.href} class="hover:text-emerald-400 transition-colors">{link.label}</a>
+      </li>
+    {/each}
   </ul>
 
-  <div class="flex justify-end mx-2">
-    <button
-      class="px-6 py-2 border border-emerald-500/50 text-emerald-500 font-mono text-xs tracking-widest uppercase hover:bg-emerald-500/10 transition-all duration-300"
+  <div class="flex justify-end">
+    <a
+      href="/steg"
+      class="px-5 py-2 border border-emerald-500/50 text-emerald-500 font-mono text-xs tracking-widest uppercase hover:bg-emerald-500/10 transition-colors"
     >
-      Sign in
-    </button>
+      Open workbench
+    </a>
   </div>
 </nav>
 
-<nav
-  class="md:hidden flex items-center justify-between bg-zinc-950 p-4 border-b border-emerald-500/20"
->
-  <div class="flex items-center gap-2">
-    <img src={logo} alt="logo" class="h-8 w-8" />
-    <span class="text-xl text-white font-mono tracking-tighter">V256</span>
-  </div>
+<nav class="md:hidden flex items-center justify-between bg-zinc-950 px-4 h-14 border-b border-zinc-900">
+  <a href="/" class="flex items-center gap-2">
+    <img src={logo} alt="" class="h-6 w-6" />
+  </a>
 
-  <button
-    on:click={toggleMenu}
-    class="text-emerald-500 p-1 active:scale-90 transition-transform"
-  >
-    {#if isMenuOpen}
-      <X size={24} />
-    {:else}
-      <Menu size={24} />
-    {/if}
-  </button>
+  <div class="flex items-center gap-1">
+    <a
+      href="/steg"
+      class="px-3 py-1.5 border border-emerald-500/50 text-emerald-500 font-mono text-[10px] tracking-widest uppercase"
+    >
+      Workbench
+    </a>
+    <button
+      onclick={toggleMenu}
+      class="text-zinc-400 p-1.5 active:scale-90 transition-transform"
+      aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+    >
+      {#if isMenuOpen}
+        <X size={20} />
+      {:else}
+        <Menu size={20} />
+      {/if}
+    </button>
+  </div>
 
   {#if isMenuOpen}
     <div
       bind:this={mobileMenu}
-      class="absolute top-[73px] left-0 w-full bg-zinc-950/95 backdrop-blur-xl z-[100] border-b border-emerald-500/30 overflow-hidden"
+      class="absolute top-14 left-0 w-full bg-zinc-950/95 backdrop-blur-xl z-[100] border-b border-zinc-800 overflow-hidden"
     >
-      <div class="flex flex-col p-6 space-y-1">
-        <div class="flex items-center gap-2 mb-4">
-          <Terminal size={12} class="text-emerald-500/50" />
-          <span
-            class="text-[10px] text-emerald-500/50 uppercase tracking-[0.3em]"
-            >System_Navigation</span
-          >
-        </div>
-
-        {#each ["Features", "About", "Pricing", "Documentation", "Sign In"] as item}
+      <div class="flex flex-col px-5 py-3">
+        {#each links as link}
           <a
-            href="#{item}"
-            class="group flex items-center justify-between py-4 border-b border-white/5 last:border-0"
-            on:click={() => (isMenuOpen = false)}
+            href={link.href}
+            class="flex items-center justify-between py-3.5 border-b border-white/5 last:border-0"
+            onclick={() => (isMenuOpen = false)}
           >
-            <span
-              class="text-zinc-400 uppercase text-xs tracking-[0.2em] group-hover:text-emerald-400 transition-colors"
-            >
-              {item}
-            </span>
-            <ChevronRight
-              size={14}
-              class="text-emerald-500/30 group-hover:text-emerald-500 transition-colors"
-            />
+            <span class="text-zinc-400 text-sm group-hover:text-emerald-400">{link.label}</span>
+            <ChevronRight size={14} class="text-zinc-700" />
           </a>
         {/each}
-
-        <div class="pt-6 pb-2">
-          <div
-            class="text-[8px] text-zinc-600 uppercase tracking-widest flex justify-between"
-          >
-            <span>Status: Operational</span>
-            <span>v.1.0.256</span>
-          </div>
-        </div>
       </div>
     </div>
   {/if}
 </nav>
-
-<style>
-  /* Ensuring fonts are available */
-  :global(body) {
-    background-color: #09090b; /* zinc-950 */
-  }
-</style>

@@ -1,5 +1,5 @@
 {
-	"name": "vault256",
+	"name": "masc",
 	"private": true,
 	"version": "0.0.1",
 	"type": "module",
@@ -8,6 +8,8 @@
 		"build": "vite build",
 		"preview": "vite preview",
 		"prepare": "svelte-kit sync || echo ''",
+		"build:wasm": "wasm-pack build crates/steg-core --target web --out-dir ../../static/wasm --release",
+		"test:steg": "node --test tests/steg/*.test.ts",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
 	},
@@ -24,13 +26,8 @@
 	},
 	"dependencies": {
 		"@tailwindcss/vite": "^4.1.18",
-		"@threlte/core": "^8.3.1",
-		"dotenv": "^17.3.1",
-		"firebase": "^12.9.0",
-		"firebase-admin": "^13.6.1",
 		"gsap": "^3.14.2",
 		"lucide-svelte": "^0.563.0",
-		"tailwindcss": "^4.1.18",
-		"three": "^0.182.0"
+		"tailwindcss": "^4.1.18"
 	}
 }

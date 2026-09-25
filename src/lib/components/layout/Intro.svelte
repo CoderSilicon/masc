@@ -9,18 +9,10 @@
   <div
     class="text-center flex flex-col justify-center items-center z-50 relative px-6"
   >
-    <div
-      class="mb-6 flex items-center gap-4 text-[10px] font-mono tracking-[0.3em] text-emerald-500/60 uppercase"
-    >
-      <span class="w-12 h-px bg-emerald-500/30"></span>
-      Secure Data Protocol v2.0.4
-      <span class="w-12 h-px bg-emerald-500/30"></span>
-    </div>
-
     <h1
       class="text-5xl md:text-7xl font-black text-white tracking-tight mb-4 jetbrains-mono-600"
     >
-      Store <span class="">Anything.</span>
+      Hide <span class="">Anything.</span>
     </h1>
 
     <div class="relative group cursor-default">
@@ -30,7 +22,7 @@
       <p
         class="relative py-2 px-6 border border-emerald-500/20 bg-black/40 backdrop-blur-sm jetbrains-mono-400 text-emerald-400 md:text-xl tracking-tighter"
       >
-        In a encrypted and immutable manner.
+        Inside any file, in plain sight.
       </p>
     </div>
 
@@ -39,40 +31,47 @@
         <p
           class="text-zinc-500 font-mono text-[10px] uppercase tracking-widest"
         >
-          Security Level
+          Method A
         </p>
-        <p class="text-white font-mono text-sm">Extreme</p>
+        <p class="text-white font-mono text-sm">Hidden in the pixels</p>
       </div>
       <div class="space-y-2 border-t border-emerald-500/50 pt-4">
         <p
           class="text-emerald-500 font-mono text-[10px] uppercase tracking-widest"
         >
-          Encryption
+          Method B
         </p>
         <p
           class="text-white font-mono text-sm underline decoration-emerald-500/50 underline-offset-4"
         >
-          AES-GCM-256
+          A file inside a file
         </p>
       </div>
       <div class="space-y-2 border-t border-zinc-800 pt-4">
         <p
           class="text-zinc-500 font-mono text-[10px] uppercase tracking-widest"
         >
-          Accessibility
+          Processing
         </p>
-        <p class="text-white font-mono text-sm">Global/Immutable</p>
+        <p class="text-white font-mono text-sm">On your device</p>
       </div>
     </div>
 
-    <button
+    <a
+      href="/steg"
       class="mt-12 group relative px-10 py-4 bg-emerald-500 text-black font-bold uppercase tracking-widest overflow-hidden transition-all duration-300 hover:ring-2 hover:ring-emerald-500 hover:ring-offset-2 hover:ring-offset-zinc-950"
     >
-      <span class="relative z-10">Initialize Launch</span>
+      <span class="relative z-10">Open Workbench</span>
       <div
         class="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-300"
       ></div>
-    </button>
+    </a>
+
+    <p
+      class="mt-6 text-[10px] text-zinc-700 font-mono tracking-wider uppercase max-w-md leading-relaxed"
+    >
+      Keep the file exactly as downloaded. Re-saving it erases the message.
+    </p>
 
     <div
       class="absolute -top-10 -left-10 w-20 h-20 border-t-2 border-l-2 border-emerald-500/20"

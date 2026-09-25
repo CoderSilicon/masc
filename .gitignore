@@ -21,3 +21,11 @@ Thumbs.db
 # Vite
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+# Rust / WASM build output. Regenerate with `npm run build:wasm`.
+/crates/target
+/static/wasm
+
+# Env secrets used by the Firebase integration
+/service-account*.json
+

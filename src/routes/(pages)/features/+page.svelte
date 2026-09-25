@@ -1,82 +1,94 @@
-<script>
-  import { Shield, Zap, Share2, EyeOff, Lock, Cpu, Globe, Activity } from 'lucide-svelte';
+<script lang="ts">
+  /**
+   * Features.
+   *
+   * Every claim here is something the workbench actually does. There is no server, so
+   * there is nothing to claim about uptime, compliance or key custody.
+   */
+  import PageShell from '$lib/components/pages/PageShell.svelte';
+  import { Images, FileArchive, Lock, Cpu, WifiOff, Ruler, Eye, Gauge } from 'lucide-svelte';
 
-  const specs = [
-    { code: "P.01", title: "ZERO_ACCESS_ARCH", status: "ACTIVE", value: "99.99%", icon: Shield, desc: "Total elimination of provider-side keys. No backdoors." },
-    { code: "P.02", codeColor: "text-emerald-500", title: "DATA_FRAGMENTATION", status: "SHARDING", value: "0.02MS", icon: Share2, desc: "Real-time shredding of data into 256-bit entropy shards." },
-    { code: "P.03", title: "QUANTUM_ENTROPY", status: "SECURED", value: "LATTICE", icon: Zap, desc: "Post-quantum cryptographic salts for long-term immunity." },
-    { code: "P.04", title: "DECENTRAL_MAINFRAME", status: "SYNCED", value: "256/256", icon: Globe, desc: "Global distribution across independent lattice nodes." },
-    { code: "P.05", title: "ANOMALY_DETECTION", status: "MONITORING", value: "NULL", icon: Activity, desc: "Heuristic monitoring for unauthorized shard reconstruction." },
-    { code: "P.06", title: "AES_NI_ACCEL", status: "HARDWARE", value: "OPTIMIZED", icon: Cpu, desc: "Direct hardware-level encryption with zero CPU latency." }
+  const features = [
+    {
+      icon: Images,
+      title: 'Hide a message in a picture',
+      body: 'Rewrites one bit of every colour channel. A 12-megapixel phone photo holds roughly 4.5 million characters — about a full novel — with no visible change.',
+      note: 'Method A'
+    },
+    {
+      icon: FileArchive,
+      title: 'Hide a file inside a file',
+      body: 'Attach any file to a picture, PDF or video. The result still opens normally, and extraction gives you back both the hidden file and a clean copy of the cover.',
+      note: 'Method B'
+    },
+    {
+      icon: Lock,
+      title: 'Optional password protection',
+      body: 'Encrypt with AES-256 before hiding, using a key stretched from your password. Without it, anyone who opens the file can read the message — so use it.',
+      note: 'Recommended'
+    },
+    {
+      icon: Ruler,
+      title: 'Know your room before you type',
+      body: 'The app measures capacity the moment you pick a picture and tells you exactly how many characters will fit.',
+      note: 'No surprises'
+    },
+    {
+      icon: Eye,
+      title: 'Damage is detected, not hidden',
+      body: 'Every container carries a checksum. If a file was re-saved or re-compressed, you are told plainly instead of being handed garbled output.',
+      note: 'CRC-32'
+    },
+    {
+      icon: WifiOff,
+      title: 'Works with the internet off',
+      body: 'No upload, no account, no server. Decoding, embedding and encryption all happen on your device, so there is nothing to intercept and nothing to leak.',
+      note: 'Fully local'
+    },
+    {
+      icon: Gauge,
+      title: 'Never blocks the page',
+      body: 'All pixel work happens on a background thread, so a 24-megapixel image does not freeze the interface.',
+      note: 'Web Worker'
+    },
+    {
+      icon: Cpu,
+      title: 'Two engines, one format',
+      body: 'A Rust core compiled to WebAssembly when you build it, with a TypeScript engine that always works. They produce identical files.',
+      note: 'Open source'
+    }
   ];
 </script>
 
-<main class="min-h-screen bg-zinc-950 text-zinc-500 font-mono p-4 md:p-8 flex flex-col">
-  
-  <header class="border border-zinc-800 p-6 mb-4 bg-black">
-    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-      <div>
-        <div class="text-emerald-500 text-[10px] font-bold tracking-[0.4em] mb-2 uppercase">Global_System_Directives // Vault256</div>
-        <h1 class="text-4xl md:text-6xl font-black text-white uppercase italic tracking-tighter leading-none">
-          Operating <span class="text-emerald-500">Parameters.</span>
-        </h1>
-      </div>
-      <div class="text-[10px] border-l border-zinc-800 pl-4 space-y-1">
-        <p>BUILD_VER: 0.9.1-ALPHA</p>
-        <p>LATTICE_NODE: PRIMARY_01</p>
-        <p class="text-emerald-500">ENCRYPTION: ENGAGED</p>
-      </div>
-    </div>
-  </header>
-
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 flex-grow">
-    {#each specs as spec}
-      <div class="border border-zinc-800 bg-black p-6 flex flex-col justify-between hover:border-emerald-500/50 transition-colors group">
-        <div>
-          <div class="flex justify-between items-start mb-6">
-            <span class="text-[10px] font-bold {spec.codeColor || 'text-zinc-700'}">{spec.code}</span>
-            <svelte:component this={spec.icon} size={16} class="text-zinc-700 group-hover:text-emerald-500 transition-colors" />
-          </div>
-          
-          <h2 class="text-white text-sm font-black tracking-widest uppercase mb-2">
-            {spec.title}
-          </h2>
-          <p class="text-[10px] leading-relaxed text-zinc-600 uppercase mb-4">
-            {spec.desc}
-          </p>
+<PageShell
+  eyebrow="// Features"
+  title="What it does"
+  lede="Everything here happens in your browser. There is no server to be fast or slow, and no account to sign up for."
+>
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+    {#each features as feature}
+      <div class="border border-zinc-800 bg-zinc-900/20 p-5 hover:border-zinc-700 transition-colors">
+        <div class="flex items-start justify-between gap-3 mb-3">
+          <feature.icon size={16} class="text-emerald-500 shrink-0" />
+          <span class="text-[9px] text-zinc-700 uppercase tracking-[0.2em] shrink-0">{feature.note}</span>
         </div>
-
-        <div class="pt-4 border-t border-zinc-900 flex justify-between items-center">
-          <div class="flex items-center gap-2">
-            <div class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></div>
-            <span class="text-[9px] font-bold tracking-widest">{spec.status}</span>
-          </div>
-          <span class="text-[11px] text-white font-black italic">{spec.value}</span>
-        </div>
+        <h2 class="text-white text-sm font-bold mb-1.5">{feature.title}</h2>
+        <p class="text-xs text-zinc-500 leading-relaxed">{feature.body}</p>
       </div>
     {/each}
   </div>
 
-  <footer class="mt-4 border border-zinc-800 bg-black p-4 flex flex-col md:flex-row justify-between items-center gap-4">
-    <div class="flex gap-8">
-      <div class="flex flex-col">
-        <span class="text-[8px] uppercase text-zinc-700">Compliance</span>
-        <span class="text-[10px] text-zinc-300 font-bold">FIPS_140-3</span>
-      </div>
-      <div class="flex flex-col">
-        <span class="text-[8px] uppercase text-zinc-700">Network_Latency</span>
-        <span class="text-[10px] text-emerald-500 font-bold">&lt;--0.0.0MS</span>
-      </div>
-    </div>
-
-    <div class="hidden lg:block text-[8px] text-zinc-800 uppercase tracking-[0.5em]">
-      [ PROTOCOL_ESTABLISHED_SUCCESSFULLY ]
-    </div>
-
-    <div class="flex items-center gap-2">
-      <span class="text-[10px] text-zinc-600 font-bold">MODE:</span>
-      <span class="bg-emerald-500 text-black px-2 py-0.5 text-[9px] font-black uppercase">Vision_Verified</span>
-    </div>
-  </footer>
-
-</main>
+  <div class="border border-zinc-800 mt-6 p-5">
+    <h2 class="text-white text-sm font-bold mb-3">And what it does not do</h2>
+    <ul class="space-y-2 text-xs text-zinc-500 list-disc list-inside">
+      <li>It does not survive re-compression. A hidden message cannot survive a resize, a re-save or a trip through a social app.</li>
+      <li>It does not hide that something is hidden. To a determined analyst, an image with unusual low-bit patterns is suspicious.</li>
+      <li>It does not hide file sizes. A picture far larger than its visible content suggests something.</li>
+      <li>It does not protect anything without a password. Hiding is not the same as encrypting.</li>
+    </ul>
+    <p class="text-[11px] text-zinc-600 mt-3 leading-relaxed">
+      The <a href="/documentation" class="text-emerald-500 hover:underline">documentation</a> covers
+      all of this in detail.
+    </p>
+  </div>
+</PageShell>
