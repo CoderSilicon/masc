@@ -79,10 +79,6 @@
     error = friendlyError(code, raw);
     log(error, 'err');
   }
-
-  // Recomputed whenever the picture or the depth changes, so the user sees how much room
-  // they have before they type. The token guards against a slow reply for an old picture
-  // landing after a new one was chosen.
   let capacityToken = 0;
 
   $effect(() => {
@@ -333,7 +329,7 @@
           <label class="flex items-center gap-2 cursor-pointer text-xs text-zinc-400">
             <input type="checkbox" bind:checked={usePassword} class="accent-emerald-500 w-3.5 h-3.5" />
             <Lock size={12} class={usePassword ? 'text-emerald-500' : 'text-zinc-600'} />
-            Protect it with a password
+           Add a password
           </label>
 
           {#if usePassword}
@@ -341,7 +337,7 @@
               type="password"
               bind:value={password}
               placeholder="Password"
-              class="w-full bg-zinc-900/50 border border-zinc-800 px-3 py-2 text-sm text-white font-mono
+              class="w-full bg-zinc-900/50 px-3 py-2 text-sm text-white font-mono
                 placeholder-zinc-700 focus:outline-none focus:border-emerald-500 transition-colors"
             />
             <p class="text-[11px] text-zinc-600 leading-relaxed">

@@ -24,8 +24,6 @@
     { id: 'append', label: 'Inside a file', blurb: METHOD_B_BLURB }
   ];
 
-  // The engine badge is a technical detail; show it only when the compiled Rust core is
-  // actually in use, so most visitors never see it.
   onMount(() => {
     let cancelled = false;
     engineInfo()
@@ -66,7 +64,7 @@
           onclick={() => (method = option.id)}
           class="text-left border p-3 transition-colors
             {method === option.id
-            ? 'border-emerald-500 bg-emerald-500/[0.06]'
+            ? 'bg-emerald-500/6'
             : 'border-zinc-800 hover:border-zinc-600 bg-zinc-900/20'}"
         >
           <span
@@ -87,10 +85,5 @@
     {/if}
 
     <Notices />
-
-    <footer class="pt-2 pb-8 text-[10px] font-mono text-zinc-700 space-y-1">
-      <p>Format spec: docs/STEGO_FORMAT.md · Core: crates/steg-core (Rust → WebAssembly)</p>
-      <p>Steganography hides data. It does not encrypt it — use a password.</p>
-    </footer>
   </main>
 </div>
