@@ -1,44 +1,114 @@
+
 <script lang="ts">
   import { TriangleAlert, Lock, EyeOff } from 'lucide-svelte';
 
   const points = [
     {
+      id: '01',
       icon: EyeOff,
-      title: 'Hidden, not locked',
-      body: 'Without a password, anyone who can run this page reads the message. There is no key to steal, because there is no key. Add a password and the message is encrypted before it is hidden.'
+      label: 'VISIBILITY',
+      title: 'Hidden is not encrypted.',
+      body: 'Without a password, anyone with access to the image and this tool can extract the message. Steganography conceals the existence of data; encryption protects its contents. Use a password when confidentiality matters.',
+      status: 'NO PASSWORD = NO ENCRYPTION'
     },
     {
+      id: '02',
       icon: TriangleAlert,
-      title: 'Fragile by nature',
-      body: 'A hidden message lives in the exact pixel values of one file. Re-compress it, resize it, or screenshot it and the message is gone. There is no second copy.'
+      label: 'FILE INTEGRITY',
+      title: 'The payload is fragile.',
+      body: 'The message is embedded in the exact pixel values of the carrier image. Re-compressing, resizing, editing or screenshotting can corrupt or destroy it. Always preserve the original encoded file.',
+      status: 'ORIGINAL FILE REQUIRED'
     },
     {
+      id: '03',
       icon: Lock,
-      title: 'Private by default',
-      body: 'Decoding, embedding and encryption all run on your device. No image, message or password is ever sent anywhere, so there is nothing to leak.'
+      label: 'DATA HANDLING',
+      title: 'Processing stays local.',
+      body: 'Embedding, extraction and encryption run on your device. The application does not need to upload your image, message or password to a remote server.',
+      status: 'LOCAL PROCESSING'
     }
   ];
 </script>
 
-<main class="bg-zinc-950 text-zinc-400 font-mono px-6 md:px-12 py-20 md:py-24" id="limits">
-  <div class="max-w-3xl mx-auto">
-    <p class="text-emerald-500 font-mono text-xs tracking-[0.3em] uppercase mb-2">// Limits</p>
-    <h1 class="text-3xl md:text-4xl font-black text-white tracking-tight mb-3">What this tool cannot do</h1>
-    <p class="text-sm text-zinc-500 mb-10 max-w-xl">
-      Steganography is a way of hiding, not a way of protecting. It is worth being clear
-      about that before you rely on it.
-    </p>
+<main id="limits" class="relative overflow-hidden bg-[#0b0c0b] px-6 py-28 text-[#e8eae5] md:px-14 md:py-36">
 
-    <div class="space-y-3">
-      {#each points as point}
-        <div class="border border-zinc-800 p-5 flex gap-4">
-          <point.icon size={18} class="text-emerald-500 shrink-0 mt-0.5" />
-          <div>
-            <h2 class="text-white text-sm font-semibold mb-1">{point.title}</h2>
-            <p class="text-xs text-zinc-400 leading-relaxed">{point.body}</p>
-          </div>
-        </div>
-      {/each}
+  <div class="mx-auto max-w-280">
+
+    <!-- Heading -->
+    <div class="mb-20 grid grid-cols-1 gap-8 md:grid-cols-[1fr_300px] md:items-end">
+
+      <div>
+
+        <h1 class="max-w-2xl text-5xl font-semibold leading-[1.02] tracking-[-0.06em] md:text-7xl">
+          Know the
+          <span class="text-zinc-500"> limitations.</span>
+        </h1>
+      </div>
     </div>
+
+    <!-- Disclosures -->
+    <div>
+
+      {#each points as point}
+        <article class="group grid grid-cols-[44px_1fr] gap-5 py-9 md:grid-cols-[90px_1fr_200px] md:gap-8 md:py-11">
+
+          <!-- Number -->
+          <div class="font-mono text-2xl tracking-tight text-zinc-700 transition-colors group-hover:text-emerald-400 md:text-3xl">
+            {point.id}
+          </div>
+
+          <!-- Content -->
+          <div>
+            <div class="mb-4 flex items-center gap-3">
+              <point.icon size={15} class="text-zinc-500" />
+              <span class="font-mono text-[10px]  tracking-[0.18em] text-zinc-500">
+                {point.label}
+              </span>
+            </div>
+
+            <h2 class="mb-3 text-xl font-medium tracking-tight text-white md:text-2xl">
+              {point.title}
+            </h2>
+
+            <p class="max-w-2xl text-sm leading-7 text-zinc-500">
+              {point.body}
+            </p>
+
+            <!-- Mobile status -->
+            <div class="mt-5 md:hidden">
+              <span class="font-mono text-[9px] tracking-widest text-zinc-600">
+                {point.status}
+              </span>
+            </div>
+          </div>
+
+          <!-- Technical status -->
+          <div class="hidden items-start justify-end pt-1 md:flex">
+            <span class="border border-white/10 px-3 py-2 font-mono text-[9px] tracking-wider text-zinc-500">
+              {point.status}
+            </span>
+          </div>
+
+        </article>
+      {/each}
+
+    </div>
+
+    <!-- Closing statement -->
+    <div class="mt-16 flex flex-col gap-5 border-l-2 border-emerald-400 pl-6 md:flex-row md:items-center md:justify-between md:gap-12">
+
+      <div>
+        <p class="mb-2 font-mono text-[10px] uppercase tracking-[0.2em] text-emerald-400">
+          Important distinction
+        </p>
+
+        <p class="max-w-2xl text-lg font-medium leading-7 tracking-tight text-white md:text-xl">
+          Steganography hides the message.
+          <span class="text-zinc-500"> Encryption protects what's inside it.</span>
+        </p>
+      </div>
+
+    </div>
+
   </div>
 </main>

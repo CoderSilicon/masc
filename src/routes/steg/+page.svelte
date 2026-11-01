@@ -1,89 +1,30 @@
 <script lang="ts">
-  /**
-   * The steganography workbench.
-   *
-   * Styled after the `/vault` dashboard, but deliberately spare: two methods, two steps
-   * each, and one always-visible warning. All processing happens in a Web Worker on the
-   * client — see `src/lib/steg/client.ts`.
-   */
-  import LsbWorkbench from '$lib/components/steg/LsbWorkbench.svelte';
-  import AppendWorkbench from '$lib/components/steg/AppendWorkbench.svelte';
-  import Notices from '$lib/components/steg/Notices.svelte';
-  import { engineInfo, type EngineInfo } from '$lib/steg/client';
-  import { METHOD_A_BLURB, METHOD_B_BLURB } from '$lib/steg/messages';
+  import Workbench from '$lib/components/steg/Workbench.svelte';
   import logo from '$lib/assets/masc.svg';
-  import { onMount } from 'svelte';
-
-  type Method = 'lsb' | 'append';
-
-  let method: Method = $state('lsb');
-  let info: EngineInfo | null = $state(null);
-
-  const METHODS: Array<{ id: Method; label: string; blurb: string }> = [
-    { id: 'lsb', label: 'In a picture', blurb: METHOD_A_BLURB },
-    { id: 'append', label: 'Inside a file', blurb: METHOD_B_BLURB }
-  ];
-
-  onMount(() => {
-    let cancelled = false;
-    engineInfo()
-      .then((value) => {
-        if (!cancelled && value.backend === 'wasm') info = value;
-      })
-      .catch(() => {});
-    return () => {
-      cancelled = true;
-    };
-  });
 </script>
 
-<div class="min-h-screen bg-zinc-950 text-white antialiased">
-  <header class="h-14 border-b border-zinc-900 flex items-center justify-between px-5 sm:px-8">
-    <a href="/" class="flex items-center gap-2.5">
-      <img src={logo} alt="" height="24" width="24" class="opacity-90" />
-      <span class="text-sm font-mono text-white">masc</span>
-      <span class="text-xs text-zinc-600 font-mono hidden sm:inline">steganography</span>
-    </a>
-
-    {#if info}
-      <span class="text-[9px] font-mono text-zinc-700 tracking-widest uppercase">rust · wasm</span>
-    {/if}
+<div class="min-h-screen bg-black text-zinc-100 antialiased">
+  <header class="border-b border-zinc-900">
+    <div class="mx-auto flex h-14 max-w-3xl items-center gap-2.5 px-5">
+      <a href="/" class="flex items-center gap-2.5">
+        <img src={logo} alt="" height="20" width="20" class="opacity-80" />
+        <span class="font-mono text-sm text-white">masc</span>
+      </a>
+      <span class="text-xs text-zinc-600">Welcome to the workbench</span>
+    </div>
   </header>
 
-  <main class="max-w-4xl mx-auto px-5 sm:px-8 py-8 space-y-5">
-    <div>
-      <h1 class="text-2xl font-semibold tracking-tight mb-1">Hide data in plain sight</h1>
-      <p class="text-sm text-zinc-500">
-        Everything runs in your browser. Nothing is uploaded.
-      </p>
+  <main class="mx-auto max-w-3xl space-y-10 px-5 py-12">
+    <div class="space-y-2">
+      <h1 class="text-2xl font-medium tracking-tight text-white">Hide data in plain sight</h1>
+      <p class="text-sm text-zinc-500">Everything hereby; runs on your device. No outside connection is made.</p>
     </div>
 
-    <div class="grid grid-cols-2 gap-2">
-      {#each METHODS as option}
-        <button
-          onclick={() => (method = option.id)}
-          class="text-left border p-3 transition-colors
-            {method === option.id
-            ? 'bg-emerald-500/6'
-            : 'border-zinc-800 hover:border-zinc-600 bg-zinc-900/20'}"
-        >
-          <span
-            class="block text-sm font-medium mb-0.5
-              {method === option.id ? 'text-emerald-400' : 'text-zinc-300'}"
-          >
-            {option.label}
-          </span>
-          <span class="block text-[11px] text-zinc-500 leading-snug">{option.blurb}</span>
-        </button>
-      {/each}
-    </div>
+    <Workbench />
 
-    {#if method === 'lsb'}
-      <LsbWorkbench />
-    {:else}
-      <AppendWorkbench />
-    {/if}
-
-    <Notices />
+    <p class="border-t border-zinc-900 pt-5 text-xs leading-relaxed text-zinc-600">
+      Keep the exact file you download. Re-saving or compressing it destroys the hidden data.
+      Hiding is not locking — add a password if the message must stay private.
+    </p>
   </main>
 </div>

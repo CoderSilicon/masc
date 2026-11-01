@@ -4,10 +4,9 @@
   import Engine from "$lib/components/layout/Engine.svelte";
   import Immunity from "$lib/components/layout/Immunity.svelte";
   import Ready from "$lib/components/layout/Ready.svelte";
-  import Navbar from "$lib/components/ui/Navbar.svelte";
 </script>
 
-<Navbar /><Intro /><Architecture /><Engine /><Immunity /><Ready />
+<Intro /><Architecture /><Engine /><Immunity /><Ready />
 
 <style>
   @keyframes progress {

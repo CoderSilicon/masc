@@ -3,9 +3,12 @@ name = "steg-core"
 version = "1.0.0"
 edition = "2021"
 description = "Client-side steganography core for masc: LSB bit embedding into RGBA images and trailing-file appending. Exposed to JavaScript via WASM."
-license = "MIT"
-repository = "https://github.com/your-org/masc"
+license-file = "../../LICENSE"
+repository = "https://github.com/CoderSilicon/masc"
 readme = "README.md"
+# Proprietary and source-available under PolyForm Strict 1.0.0: never publish this crate
+# to a registry.
+publish = false
 
 [lib]
 # cdylib -> .wasm for the browser, rlib -> so `cargo test` works natively.

@@ -45,13 +45,21 @@ All the format logic is plain Rust with no JS dependency, so the native test sui
 anywhere you have a Rust toolchain:
 
 ```bash
-cargo test -p steg-core
+cd crates/steg-core
+cargo test
 ```
 
 `cargo test` covers the LSB round trip, the one-bit-only guarantee, alpha skipping,
 two-plane mode, capacity enforcement, corruption detection, carrier-offset resync, PNG
 chunk insertion/removal, tail append, path-traversal stripping in filenames, signature
 carving, and the exact golden byte vectors.
+
+The full application tests live in the repository root:
+
+```bash
+npm run test:steg   # TypeScript mirror
+npm run check       # Svelte + TypeScript diagnostics
+```
 
 ## WASM API
 
@@ -82,3 +90,15 @@ carving, and the exact golden byte vectors.
   during canvas compositing and the RGB of such a pixel is not round-trip stable.
 * Randomness comes from the browser CSPRNG (`crypto.getRandomValues`). Never substitute
   `Math.random()`.
+
+See the repository's [`SECURITY.md`](../../SECURITY.md) for the threat model and private
+vulnerability reporting process, and [`CONTRIBUTING.md`](../../CONTRIBUTING.md) for the
+format-parity checklist.
+
+## License
+
+This crate is part of masc and is licensed under the **PolyForm Strict License 1.0.0**.
+Copyright © 2026 CoderSilicon. All rights reserved.
+
+You may use the crate for noncommercial purposes, but you may not modify, redistribute, or
+claim ownership of it. See [`../../LICENSE`](../../LICENSE) for the full terms.

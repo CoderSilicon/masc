@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Report a security vulnerability
+    url: https://github.com/CoderSilicon/masc/security/advisories/new
+    about: Please report security issues privately. Do not open a public issue.
+  - name: Read the contribution guide
+    url: https://github.com/CoderSilicon/masc/blob/main/CONTRIBUTING.md
+    about: Development setup, parity rules, testing, and contribution terms.
+  - name: Read the license
+    url: https://github.com/CoderSilicon/masc/blob/main/LICENSE
+    about: masc is source-available and proprietary to CoderSilicon. Noncommercial use only; no modification or redistribution.

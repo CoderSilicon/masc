@@ -204,3 +204,8 @@ ZIP length is resolved exactly by locating the End-Of-Central-Directory record (
 
 This exists so the tool is useful against files produced by *other* steganography tools
 (`zip -A`, `cat a.jpg b.zip`, ImageSteg, OpenStego …), not only against its own output.
+
+---
+
+© 2026 CoderSilicon. All rights reserved. This specification is part of masc; see
+[`../LICENSE`](../LICENSE).

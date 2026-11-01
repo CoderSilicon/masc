@@ -1,0 +1,111 @@
+name: Bug report
+description: Report a reproducible bug in masc
+title: "bug: "
+labels: ["bug", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug.
+
+        **Do not report security vulnerabilities here.** Follow
+        [SECURITY.md](https://github.com/CoderSilicon/masc/blob/main/SECURITY.md)
+        and use GitHub's private vulnerability reporting instead.
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: What happened?
+      description: A clear description of the bug and its impact.
+      placeholder: When I..., masc...
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Include a minimal carrier or payload if it is safe to share. Redact secrets.
+      placeholder: |
+        1. Open /steg
+        2. Select ...
+        3. ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behaviour
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behaviour
+      description: Include the exact error text or code shown by the UI, if any.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: method
+    attributes:
+      label: Which mode were you using?
+      multiple: true
+      options:
+        - In a picture (LSB / Method A)
+        - Inside a file (trailer / Method B)
+        - Both
+        - Not sure
+    validations:
+      required: true
+
+  - type: dropdown
+    id: backend
+    attributes:
+      label: Engine backend
+      description: The workbench reports the active backend in its diagnostics.
+      options:
+        - WASM
+        - TypeScript fallback
+        - Not sure
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: masc version / commit
+      placeholder: v1.0.0 or commit SHA
+    validations:
+      required: true
+
+  - type: input
+    id: browser
+    attributes:
+      label: Browser and OS
+      placeholder: Firefox 128 on Ubuntu 24.04
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs, screenshots, or sample files
+      description: Paste relevant console output. Do not include passwords or sensitive payloads.
+      render: shell
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: confirm
+    attributes:
+      label: Confirmation
+      options:
+        - label: I have searched existing issues and this is not a duplicate.
+          required: true
+        - label: This is not a security vulnerability.
+          required: true
+        - label: I agree to follow the Code of Conduct.
+          required: true

@@ -1,51 +1,147 @@
+
 <script lang="ts">
   const steps = [
-    { id: '01', title: 'Pick a picture', desc: 'Any picture. Bigger holds more.' },
-    { id: '02', title: 'Write your message', desc: 'Optionally lock it with a password.' },
-    { id: '03', title: 'Bits are rewritten', desc: 'One bit per colour. Invisible to the eye.' },
-    { id: '04', title: 'Saved as PNG', desc: 'Lossless, so the message survives.' }
+    {
+      id: '01',
+      title: 'Select an image',
+      desc: 'Choose a PNG image. Larger dimensions allow more data to be embedded.',
+    },
+    {
+      id: '02',
+      title: 'Enter your payload',
+      desc: 'Write your message and optionally protect it with a password.',
+    },
+    {
+      id: '03',
+      title: 'Encode the data',
+      desc: 'Bits are embedded into pixel colour values using least significant bits.',
+    },
+    {
+      id: '04',
+      title: 'Export the result',
+      desc: 'Download the encoded image as PNG to preserve the hidden data.',
+    }
+  ];
+
+  const destroys = [
+    'Social media image compression',
+    'Re-saving through image editors',
+    'Resizing or taking screenshots',
+    'Converting to JPEG'
+  ];
+
+  const preserves = [
+    'Moving the original downloaded file',
+    'Keeping the image in PNG format',
+    'Using the optional encryption password',
+    'Processing locally on your device'
   ];
 </script>
 
-<main id="how" class="bg-zinc-950 text-zinc-400 font-sans px-6 md:px-12 py-20 md:py-28 overflow-x-hidden">
-  <div class="max-w-4xl mx-auto">
-    <p class="text-emerald-500 font-mono text-xs tracking-[0.3em] uppercase mb-2">// How it works</p>
-    <h1 class="text-3xl md:text-4xl font-black text-white tracking-tight mb-10">Four steps. Nothing leaves your device.</h1>
+<main id="how" class="relative overflow-hidden bg-[#0b0c0b] px-6 py-28 text-[#e8eae5] md:px-14 md:py-36">
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-20">
-      {#each steps as step}
-        <div class="border border-zinc-800 p-4">
-          <span class="text-[10px] font-mono text-zinc-600 block mb-1.5">STEP_{step.id}</span>
-          <h2 class="text-white text-sm font-semibold mb-1">{step.title}</h2>
-          <p class="text-xs text-zinc-500 leading-relaxed">{step.desc}</p>
+  <div class="relative mx-auto max-w-300">
+
+    <!-- Section heading -->
+    <div class="mb-20 flex flex-col justify-between gap-8 md:flex-row md:items-end">
+
+      <div>
+
+        <h1 class="max-w-2xl text-4xl font-semibold leading-[1.05] tracking-[-0.05em] md:text-6xl">
+          Behind the
+          <span class="text-zinc-500"> concealment.</span>
+        </h1>
+      </div>
+
+
+    </div>
+
+    <!-- Process timeline -->
+    <div class="relative mb-28">
+
+      <div class="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-0">
+
+        {#each steps as step, i}
+          <div class="relative group">
+
+            <!-- Connecting line -->
+            <div class="absolute left-0 top-4.75 hidden h-px w-full bg-white/10 lg:block"></div>
+
+            <div class="relative z-10 mb-8 flex items-center gap-4">
+              <div class="flex h-10 w-10 shrink-0 items-center justify-center border border-white/20 bg-[#0b0c0b] font-mono text-xs text-emerald-400 transition-colors group-hover:border-emerald-400">
+                {step.id}
+              </div>
+            </div>
+
+            <div class="pr-8">
+              <h2 class="mb-3 text-lg font-medium tracking-tight text-white">
+                {step.title}
+              </h2>
+              <p class="max-w-60 text-sm leading-6 text-zinc-500">
+                {step.desc}
+              </p>
+            </div>
+
+          </div>
+        {/each}
+
+      </div>
+    </div>
+
+    <!-- File integrity -->
+    <div class=" pt-8">
+
+      <div class="mb-10 flex flex-col justify-between gap-3 md:flex-row md:items-center">
+        <div>
+          <h2 class="text-2xl font-semibold tracking-tight text-white md:text-3xl">
+            Not every operation is harmless.
+          </h2>
         </div>
-      {/each}
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-      <div class="border border-red-900/30 bg-red-950/10 p-5">
-        <h2 class="text-red-400/80 font-mono uppercase tracking-widest text-xs mb-3">What destroys a hidden message</h2>
-        <ul class="space-y-2">
-          {#each ['Uploading to X, Discord or Instagram', 'Re-saving from an image editor', 'Resizing or screenshotting', 'Storing as JPEG'] as item}
-            <li class="flex gap-2 text-xs text-zinc-400">
-              <span class="text-red-900/60">&times;</span>
-              {item}
-            </li>
-          {/each}
-        </ul>
       </div>
 
-      <div class="border border-emerald-500/30 bg-emerald-500/[0.04] p-5">
-        <h2 class="text-emerald-400 font-mono uppercase tracking-widest text-xs mb-3">What keeps it safe</h2>
-        <ul class="space-y-2">
-          {#each ['Downloading the file and moving that file', 'PNG only', 'An optional password (AES-256)', 'No server, no upload, no account'] as item}
-            <li class="flex gap-2 text-xs text-zinc-300">
-              <span class="text-emerald-500">&bull;</span>
-              {item}
-            </li>
-          {/each}
-        </ul>
+      <div class="grid grid-cols-1 gap-px bg-white/10 md:grid-cols-2">
+
+        <!-- Destructive operations -->
+        <div class="bg-[#0b0c0b] p-6 md:p-9">
+          <div class="mb-8 flex items-center justify-between">
+            <h3 class="text-sm font-medium text-zinc-300">
+              Data corruption risks
+            </h3>
+            <span class="font-mono text-[10px] text-red-400/80">RISK</span>
+          </div>
+
+          <ul class="space-y-5">
+            {#each destroys as item}
+              <li class="flex items-center gap-4 text-sm text-zinc-500">
+                <span class="font-mono text-xs text-red-400/70">−</span>
+                {item}
+              </li>
+            {/each}
+          </ul>
+        </div>
+
+        <!-- Safe operations -->
+        <div class="bg-[#0b0c0b] p-6 md:p-9">
+          <div class="mb-8 flex items-center justify-between">
+            <h3 class="text-sm font-medium text-zinc-300">
+              Preservation practices
+            </h3>
+            <span class="font-mono text-[10px] text-emerald-400">SAFE</span>
+          </div>
+
+          <ul class="space-y-5">
+            {#each preserves as item}
+              <li class="flex items-center gap-4 text-sm text-zinc-400">
+                <span class="font-mono text-xs text-emerald-400">+</span>
+                {item}
+              </li>
+            {/each}
+          </ul>
+        </div>
+
       </div>
     </div>
+
+
   </div>
 </main>
