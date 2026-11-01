@@ -106,64 +106,6 @@ The extractor also performs forensic carving when it finds no masc trailer: it s
 data past the image's EOF marker for known file signatures and lets you save what it
 finds.
 
-## Quick start
-
-### Requirements
-
-- **Node.js 20.19+ and npm** to run the app
-- **Node.js 22.18+** to run the TypeScript test suite with native type stripping
-- **Rust + `wasm32-unknown-unknown`** — optional, only for the accelerated WASM core
-- A modern browser with WebCrypto and Web Workers
-
-### Run locally
-
-```bash
-git clone https://github.com/CoderSilicon/masc.git
-cd masc
-npm install
-npm run dev
-```
-
-Open <http://localhost:5173> and choose **Ouvrir** to enter the workbench.
-
-### Build for production
-
-```bash
-npm run build
-npm run preview
-```
-
-### Build the WASM core (optional)
-
-masc ships with a TypeScript engine that works everywhere. The Rust core is preferred
-when present because it is faster on large images; if the WASM module is missing, the app
-falls back automatically.
-
-```bash
-rustup target add wasm32-unknown-unknown
-cargo install wasm-pack
-npm run build:wasm
-```
-
-The generated module lands in `static/wasm/`. It is not committed.
-
-### Useful commands
-
-| Command | Purpose |
-| --- | --- |
-| `npm run dev` | Start the Vite dev server |
-| `npm run build` | Production build |
-| `npm run preview` | Preview the production build |
-| `npm run check` | Svelte + TypeScript diagnostics |
-| `npm run test:steg` | Node test suite for the TypeScript core |
-| `npm run build:wasm` | Compile the Rust core to WebAssembly |
-
-To test the Rust side:
-
-```bash
-cd crates/steg-core
-cargo test
-```
 
 ## Usage
 
